@@ -1,0 +1,871 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GLASTO S.A. — Ingeniería electromecánica aplicada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#0c2340;
+    --navy-mid:#0f3159;
+    --blue-primary:#1a56a8;
+    --blue-bright:#2f7fd6;
+    --steel:#5b6472;
+    --ink:#151a22;
+    --paper:#f5f6f8;
+    --white:#ffffff;
+    --line:#dde2e8;
+    --line-dark:rgba(255,255,255,0.16);
+    --amber:#e0a537;
+    --radius:2px;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--white);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    line-height:1.15;
+    letter-spacing:-0.01em;
+  }
+  .mono{
+    font-family:'JetBrains Mono',monospace;
+    letter-spacing:0.02em;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+  :focus-visible{outline:2px solid var(--blue-bright);outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;scroll-behavior:auto !important;}
+  }
+ 
+  /* ---------- Reference tag (signature element) ---------- */
+  .ref-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--blue-bright);
+    border:1px solid rgba(47,127,214,0.35);
+    padding:4px 10px;
+    border-radius:2px;
+  }
+  .ref-tag::before{
+    content:"§";
+    opacity:0.6;
+  }
+  .ref-tag--dark{
+    color:#9fc4ee;
+    border-color:rgba(159,196,238,0.3);
+  }
+ 
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(12,35,64,0.94);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line-dark);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    height:74px;
+  }
+  .logo{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    font-size:22px;
+    color:#e8ebef;
+  }
+  .logo .a-accent{color:var(--blue-bright);}
+  .logo sup{font-size:10px;opacity:0.6;margin-left:2px;}
+  nav ul{list-style:none;display:flex;gap:34px;}
+  nav ul li a{
+    color:#c4cbd6;
+    font-size:14px;
+    font-weight:500;
+    transition:color .15s;
+  }
+  nav ul li a:hover{color:#ffffff;}
+  .nav-cta{
+    background:var(--blue-bright);
+    color:#fff;
+    padding:10px 20px;
+    font-size:14px;
+    font-weight:600;
+    border-radius:2px;
+    transition:background .15s;
+  }
+  .nav-cta:hover{background:#4590de;}
+  .menu-toggle{display:none;background:none;border:none;color:#fff;font-size:26px;cursor:pointer;}
+ 
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    background:
+      linear-gradient(180deg, rgba(12,35,64,0.88) 0%, rgba(12,35,64,0.97) 100%),
+      var(--navy-deep);
+    color:#fff;
+    overflow:hidden;
+    padding:120px 0 100px;
+  }
+  .blueprint-grid{
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(159,196,238,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(159,196,238,0.08) 1px, transparent 1px);
+    background-size:44px 44px;
+    mask-image:radial-gradient(ellipse 80% 60% at 70% 30%, black 40%, transparent 85%);
+  }
+  .hero-inner{position:relative;z-index:2;max-width:720px;}
+  .hero .ref-tag{margin-bottom:24px;}
+  .hero h1{
+    font-size:clamp(34px,5.4vw,56px);
+    margin:18px 0 22px;
+    color:#fff;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--blue-bright);
+  }
+  .hero p{
+    font-size:17px;
+    color:#c4cbd6;
+    max-width:560px;
+    margin-bottom:34px;
+  }
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    display:inline-block;
+    padding:14px 26px;
+    font-size:14px;
+    font-weight:600;
+    border-radius:2px;
+    transition:all .15s;
+    border:1px solid transparent;
+  }
+  .btn-primary{background:var(--blue-bright);color:#fff;}
+  .btn-primary:hover{background:#4590de;}
+  .btn-ghost{border-color:rgba(255,255,255,0.3);color:#fff;}
+  .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,0.06);}
+ 
+  .hero-meta{
+    position:relative;z-index:2;
+    display:flex;gap:0;
+    margin-top:64px;
+    border-top:1px solid var(--line-dark);
+    padding-top:24px;
+    flex-wrap:wrap;
+  }
+  .hero-meta .item{
+    padding-right:40px;margin-right:40px;
+    border-right:1px solid var(--line-dark);
+  }
+  .hero-meta .item:last-child{border-right:none;}
+  .hero-meta .item .num{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:22px;font-weight:600;color:#fff;
+  }
+  .hero-meta .item .lbl{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;color:#9fc4ee;
+    text-transform:uppercase;letter-spacing:0.05em;
+    margin-top:4px;display:block;
+  }
+ 
+  /* ---------- Section shell ---------- */
+  section{padding:96px 0;}
+  .section-alt{background:var(--paper);}
+  .eyebrow{
+    display:flex;align-items:center;gap:12px;
+    margin-bottom:16px;
+  }
+  .eyebrow .ref-tag{color:var(--blue-primary);border-color:rgba(26,86,168,0.3);}
+  .eyebrow .ref-tag::before{color:var(--blue-primary);}
+  .section-head{max-width:640px;margin-bottom:56px;}
+  .section-head h2{font-size:clamp(26px,3.4vw,38px);margin-bottom:14px;}
+  .section-head p{color:var(--steel);font-size:16px;}
+ 
+  /* ---------- Sobre la empresa ---------- */
+  .about-grid{
+    display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;align-items:start;
+  }
+  .about-grid p{color:var(--steel);margin-bottom:16px;font-size:15.5px;}
+  .about-since{
+    border:1px solid var(--line);
+    padding:28px;
+    background:var(--white);
+  }
+  .about-since .year{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:44px;font-weight:700;color:var(--blue-primary);
+    line-height:1;
+  }
+  .about-since .desc{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;color:var(--steel);
+    text-transform:uppercase;letter-spacing:0.04em;
+    margin-top:10px;
+  }
+  .about-since hr{border:none;border-top:1px solid var(--line);margin:20px 0;}
+ 
+  /* ---------- Misión / Visión ---------- */
+  .mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);}
+  .mv-card{background:var(--white);padding:40px;}
+  .mv-card .ref-tag{margin-bottom:18px;}
+  .mv-card h3{font-size:20px;margin-bottom:14px;}
+  .mv-card p{color:var(--steel);font-size:15px;}
+ 
+  /* ---------- Valores ---------- */
+  .values-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .value-card{background:var(--white);padding:32px 26px;}
+  .value-card .vnum{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;color:var(--blue-bright);margin-bottom:16px;display:block;
+  }
+  .value-card h4{font-size:17px;margin-bottom:10px;}
+  .value-card p{color:var(--steel);font-size:14px;}
+ 
+  /* ---------- Servicios ---------- */
+  .services-list{border-top:1px solid var(--line);}
+  .service-row{
+    display:grid;grid-template-columns:280px 1fr;gap:40px;
+    padding:36px 0;border-bottom:1px solid var(--line);
+  }
+  .service-row .service-title{
+    display:flex;align-items:baseline;gap:12px;
+  }
+  .service-row .service-title .idx{
+    font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--blue-bright);
+  }
+  .service-row h3{font-size:19px;}
+  .service-items{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:10px 32px;
+    list-style:none;
+  }
+  .service-items li{
+    font-size:14.5px;color:var(--steel);
+    padding-left:16px;position:relative;
+  }
+  .service-items li::before{
+    content:"";
+    position:absolute;left:0;top:9px;
+    width:6px;height:1px;background:var(--blue-primary);
+  }
+ 
+  /* ---------- Diferenciadores ---------- */
+  .diff-strip{
+    background:var(--navy-deep);color:#fff;
+  }
+  .diff-strip .section-head p{color:#a8b3c1;}
+  .diff-strip .section-head h2{color:#fff;}
+  .diff-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-dark);}
+  .diff-card{background:var(--navy-deep);padding:28px 22px;}
+  .diff-card .ref-tag--dark{margin-bottom:16px;}
+  .diff-card h4{color:#fff;font-size:16px;margin-bottom:8px;}
+  .diff-card p{color:#a8b3c1;font-size:13.5px;}
+ 
+  /* ---------- Áreas de negocio / Proyectos ---------- */
+  .biz-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:36px;}
+  .biz-tab{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;text-transform:uppercase;letter-spacing:0.04em;
+    padding:9px 16px;border:1px solid var(--line);
+    background:var(--white);color:var(--steel);cursor:pointer;
+    border-radius:2px;transition:all .15s;
+  }
+  .biz-tab.active,.biz-tab:hover{
+    border-color:var(--blue-primary);color:var(--blue-primary);background:#eef4fb;
+  }
+  .biz-panel{display:none;}
+  .biz-panel.active{display:block;}
+  .proj-table{width:100%;border-collapse:collapse;}
+  .proj-table tr{border-bottom:1px solid var(--line);}
+  .proj-table td{padding:14px 10px;font-size:14.5px;vertical-align:top;}
+  .proj-table td.pname{font-weight:600;color:var(--ink);width:46%;}
+  .proj-table td.pref{color:var(--steel);}
+  .proj-table td.ptag{text-align:right;white-space:nowrap;}
+  .tag{
+    font-family:'JetBrains Mono',monospace;font-size:11px;
+    color:var(--blue-primary);border:1px solid rgba(26,86,168,0.3);
+    padding:2px 7px;border-radius:2px;
+  }
+  .ref-legend{
+    margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--steel);
+    display:flex;gap:22px;flex-wrap:wrap;
+  }
+ 
+  /* ---------- Clientes ---------- */
+  .clients-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);
+    margin-top:8px;
+  }
+  .client-cell{
+    background:var(--white);padding:30px 20px;
+    display:flex;align-items:center;justify-content:center;
+    min-height:96px;
+  }
+  .client-name{
+    font-family:'Space Grotesk',sans-serif;font-weight:600;
+    font-size:15px;color:var(--steel);text-align:center;
+    letter-spacing:0.01em;
+  }
+ 
+  /* ---------- Equipo ---------- */
+  .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  .team-card{border:1px solid var(--line);padding:24px;}
+  .team-card .role{
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue-primary);
+    text-transform:uppercase;letter-spacing:0.04em;margin-bottom:10px;display:block;
+  }
+  .team-card h4{font-size:16px;margin-bottom:4px;}
+  .team-card .tel{color:var(--steel);font-size:13.5px;margin-top:8px;}
+ 
+  /* ---------- Contacto ---------- */
+  .contact-wrap{
+    display:grid;grid-template-columns:1fr 1fr;gap:64px;
+  }
+  .contact-cards{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);}
+  .contact-card{background:var(--white);padding:26px 28px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;}
+  .contact-card .who .name{font-weight:600;font-size:15.5px;}
+  .contact-card .who .role{color:var(--steel);font-size:13px;margin-top:2px;}
+  .contact-card .how{text-align:right;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--blue-primary);}
+  .contact-card .how a{display:block;margin-bottom:2px;}
+  .contact-note{
+    margin-top:24px;font-size:13.5px;color:var(--steel);
+    border-left:2px solid var(--blue-bright);padding-left:14px;
+  }
+  .address-block .ref-tag{margin-bottom:18px;}
+  .address-block h3{font-size:19px;margin-bottom:14px;}
+  .address-block address{font-style:normal;color:var(--steel);font-size:15px;line-height:1.8;}
+  .map-frame{
+    margin-top:26px;border:1px solid var(--line);
+    height:220px;
+    background:
+      linear-gradient(rgba(26,86,168,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26,86,168,0.05) 1px, transparent 1px),
+      var(--paper);
+    background-size:24px 24px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .map-frame span{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--steel);}
+ 
+  /* ---------- Footer ---------- */
+  footer{background:var(--navy-deep);color:#a8b3c1;padding:56px 0 30px;}
+  .footer-top{
+    display:flex;justify-content:space-between;align-items:flex-start;
+    padding-bottom:36px;border-bottom:1px solid var(--line-dark);
+    flex-wrap:wrap;gap:24px;
+  }
+  .footer-top .logo{margin-bottom:10px;}
+  .footer-top p{max-width:340px;font-size:14px;color:#8695a8;}
+  .footer-cols{display:flex;gap:64px;flex-wrap:wrap;}
+  .footer-col h5{
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:#9fc4ee;
+    text-transform:uppercase;letter-spacing:0.05em;margin-bottom:14px;
+  }
+  .footer-col ul{list-style:none;}
+  .footer-col li{margin-bottom:8px;font-size:14px;}
+  .footer-col a:hover{color:#fff;}
+  .footer-bottom{
+    display:flex;justify-content:space-between;padding-top:24px;
+    font-size:12.5px;color:#6b7889;flex-wrap:wrap;gap:10px;
+  }
+ 
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px){
+    .about-grid,.mv-grid,.contact-wrap{grid-template-columns:1fr;}
+    .mv-grid{gap:1px;}
+    .values-grid{grid-template-columns:repeat(2,1fr);}
+    .diff-grid{grid-template-columns:repeat(2,1fr);}
+    .clients-grid{grid-template-columns:repeat(2,1fr);}
+    .team-grid{grid-template-columns:repeat(2,1fr);}
+    .service-row{grid-template-columns:1fr;gap:16px;}
+    .service-items{grid-template-columns:1fr;}
+    .hero-meta .item{padding-right:24px;margin-right:24px;}
+  }
+  @media (max-width: 640px){
+    nav ul{
+      position:fixed;top:74px;left:0;right:0;
+      background:var(--navy-deep);
+      flex-direction:column;gap:0;
+      max-height:0;overflow:hidden;
+      transition:max-height .25s ease;
+      border-bottom:1px solid var(--line-dark);
+    }
+    nav ul.open{max-height:400px;}
+    nav ul li{width:100%;}
+    nav ul li a{display:block;padding:16px 28px;border-top:1px solid var(--line-dark);}
+    .nav-cta{display:none;}
+    .menu-toggle{display:block;}
+    .values-grid,.diff-grid,.clients-grid,.team-grid{grid-template-columns:1fr;}
+    section{padding:64px 0;}
+    .hero{padding:90px 0 70px;}
+    .proj-table td.pref{display:none;}
+  }
+</style>
+</head>
+<body>
+ 
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="logo">gl<span class="a-accent">a</span>sto<sup>®</sup></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    <ul id="navMenu">
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#equipo">Equipo</a></li>
+      <li><a href="#contacto" class="nav-cta">Contacto</a></li>
+    </ul>
+  </div>
+</header>
+ 
+<section class="hero" id="top">
+  <div class="blueprint-grid"></div>
+  <div class="wrap hero-inner">
+    <span class="ref-tag ref-tag--dark">Ingeniería electromecánica aplicada</span>
+    <h1>Seguridad y confianza en cada <em>instalación técnica</em>.</h1>
+    <p>Respondemos a las necesidades técnicas del cliente y damos seguridad en las instalaciones, tanto técnicas como financieras, a través de proyectos de ingeniería electromecánica desarrollados con transparencia y excelencia.</p>
+    <div class="hero-actions">
+      <a href="#contacto" class="btn btn-primary">Iniciar una conversación</a>
+      <a href="#servicios" class="btn btn-ghost">Ver servicios</a>
+    </div>
+  </div>
+  <div class="wrap hero-meta">
+    <div class="item"><span class="num">2015</span><span class="lbl">Inicio de operaciones</span></div>
+    <div class="item"><span class="num">5</span><span class="lbl">Áreas de servicio</span></div>
+    <div class="item"><span class="num">San Lorenzo</span><span class="lbl">Paraguay</span></div>
+  </div>
+</section>
+ 
+<section id="nosotros">
+  <div class="wrap">
+    <div class="eyebrow"><span class="ref-tag">Sobre la empresa</span></div>
+    <div class="about-grid">
+      <div>
+        <h2 style="margin-bottom:24px;">Soporte técnico que se convirtió en desarrollo integral de proyectos</h2>
+        <p>Somos una empresa enfocada en la resolución de sistemas electromecánicos: desarrollo de proyectos eléctricos, montajes en baja y media tensión, evaluación de calidad de energía, protección ante riesgos eléctricos, sistemas de puesta a tierra y energía alternativa.</p>
+        <p>Iniciamos en 2015 apuntando al desarrollo de proyectos eléctricos, siendo soporte técnico externo de empresas de ingeniería con alta experiencia en el rubro. De esta manera, y con esfuerzo sostenido, fuimos ganando experiencia y reconocimiento.</p>
+        <p>Nos lanzamos luego a la ejecución de pequeñas obras en bajas potencias, sin dejar de lado la base de proyecto que nos llevó a ello. En 2017 accedimos a integrar un equipo de fiscalización de obras, lo que nos dio el perfil para tomar obras y fiscalizarlas.</p>
+      </div>
+      <div class="about-since">
+        <span class="year">2015</span>
+        <span class="desc">Desde 2015 desarrollando soluciones de ingeniería electromecánica</span>
+        <hr>
+        <p style="color:var(--steel);font-size:14px;">2017 — incorporación al equipo de fiscalización de obras, ampliando el perfil de la empresa a la toma y fiscalización de proyectos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<section class="section-alt">
+  <div class="wrap">
+    <div class="eyebrow"><span class="ref-tag">Misión &amp; Visión</span></div>
+    <div class="mv-grid">
+      <div class="mv-card">
+        <span class="ref-tag">Misión</span>
+        <h3>Seguridad técnica y financiera</h3>
+        <p>Responder a las necesidades técnicas del cliente, dar seguridad en las instalaciones, tanto técnicas como financieras.</p>
+      </div>
+      <div class="mv-card">
+        <span class="ref-tag">Visión</span>
+        <h3>Reconocimiento por confianza</h3>
+        <p>Llegar a ser una empresa reconocida en el sector electromecánico, por los trabajos realizados, por la seguridad transmitida y básicamente por la confianza con el cliente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<section id="valores">
+  <div class="wrap">
+    <div class="eyebrow"><span class="ref-tag">Valores</span></div>
+    <div class="section-head">
+      <h2>Los cuatro principios que sostienen cada proyecto</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card">
+        <span class="vnum">01 / TRANSPARENCIA</span>
+        <h4>Transparencia</h4>
+        <p>Somos una empresa caracterizada por su transparencia y ética como soporte fundamental de su existencia.</p>
+      </div>
+      <div class="value-card">
+        <span class="vnum">02 / HONESTIDAD</span>
+        <h4>Honestidad</h4>
+        <p>Respaldados mediante contratos claros, nuestro trabajo se describe con todos los términos para que el cliente tenga tranquilidad al realizar su inversión.</p>
+      </div>
+      <div class="value-card">
+        <span class="vnum">03 / EXCELENCIA</span>
+        <h4>Excelencia</h4>
+        <p>Conforme a normativas y reglamentos vigentes, nuestros proyectos e instalaciones apuntan a la mayor calidad y, por sobre todo, seguridad.</p>
+      </div>
+      <div class="value-card">
+        <span class="vnum">04 / PUNTUALIDAD</span>
+        <h4>Puntualidad</h4>
+        <p>Garantizamos la entrega en tiempo y forma. No nos comprometemos a firmar un contrato sin la certeza de poder cumplirlo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<section class="section-alt" id="servicios">
+  <div class="wrap">
+    <div class="eyebrow"><span class="ref-tag">Servicios</span></div>
+    <div class="section-head">
+      <h2>Cinco áreas de desarrollo, ejecución y fiscalización</h2>
+      <p>Todo lo que ofrecemos está descrito a continuación tal como fue definido en nuestro material técnico.</p>
+    </div>
+    <div class="services-list">
+      <div class="service-row">
+        <div class="service-title"><span class="idx">01</span><h3>Desarrollo de Proyectos Eléctricos</h3></div>
+        <ul class="service-items">
+          <li>Sistema de iluminación</li>
+          <li>Sistema de fuerza, tomas de corriente, motores y equipamiento en general</li>
+          <li>Sistema de puesta a tierra</li>
+          <li>Sistema de protección contra rayos</li>
+        </ul>
+      </div>
+      <div class="service-row">
+        <div class="service-title"><span class="idx">02</span><h3>Desarrollo de Proyectos de Señales Débiles</h3></div>
+        <ul class="service-items">
+          <li>Sistema de detección de incendio</li>
+          <li>Sistema de seguridad electrónica</li>
+          <li>Sistema de monitoreo CCTV</li>
+          <li>Sistema de domótica / integración</li>
+        </ul>
+      </div>
+      <div class="service-row">
+        <div class="service-title"><span class="idx">03</span><h3>Desarrollo de Proyectos de Agua y Saneamiento</h3></div>
+        <ul class="service-items">
+          <li>Sistema de abastecimiento de agua potable</li>
+          <li>Sistema de bombeo de aguas residuales</li>
+        </ul>
+      </div>
+      <div class="service-row">
+        <div class="service-title"><span class="idx">04</span><h3>Ejecución de Obras Eléctricas / Electromecánicas</h3></div>
+        <ul class="service-items">
+          <li>Instalación eléctrica en baja tensión</li>
+          <li>Instalación eléctrica en media tensión</li>
+          <li>Montaje de transformadores</li>
+          <li>Montaje de generadores</li>
+          <li>Sistema de presurización de escalera</li>
+          <li>Sistema de combate de incendios PCI hidráulico</li>
+          <li>Sistema de bombeo de agua potable</li>
+          <li>Sistema de bombeo de aguas residuales</li>
+        </ul>
+      </div>
+      <div class="service-row">
+        <div class="service-title"><span class="idx">05</span><h3>Fiscalización de Obras Eléctricas / Electromecánicas</h3></div>
+        <ul class="service-items">
+          <li>Instalación eléctrica en baja tensión</li>
+          <li>Instalación eléctrica en media tensión</li>
+          <li>Montaje de transformadores</li>
+          <li>Montaje de generadores</li>
+          <li>Sistema de presurización de escalera</li>
+          <li>Sistema de combate de incendios PCI hidráulico</li>
+          <li>Sistema de bombeo de agua potable</li>
+          <li>Sistema de bombeo de aguas residuales</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<section class="diff-strip">
+  <div class="wrap">
+    <div class="eyebrow"><span class="ref-tag ref-tag--dark">Diferenciadores</span></div>
+    <div class="section-head">
+      <h2>Lo que sostiene cada proyecto que fiscalizamos o ejecutamos</h2>
+    </div>
+    <div class="diff-grid">
+      <div class="diff-card">
+        <span class="ref-tag ref-tag--dark">A</span>
+        <h4>Seguridad</h4>
+        <p>Instalaciones pensadas para dar seguridad técnica y financiera al cliente.</p>
+      </div>
+      <div class="diff-card">
+        <span class="ref-tag ref-tag--dark">B</span>
+        <h4>Claridad</h4>
+        <p>Contratos claros, con todos los términos descritos para una inversión con tranquilidad.</p>
+      </div>
+      <div class="diff-card">
+        <span class="ref-tag ref-tag--dark">C</span>
+        <h4>Calidad</h4>
+        <p>Proyectos e instalaciones conformes a normativas y reglamentos vigentes.</p>
+      </div>
+      <div class="diff-card">
+        <span class="ref-tag ref-tag--dark">D</span>
+        <h4>Confianza</h4>
+        <p>Relación de largo plazo construida trabajo a trabajo con cada cliente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<section id="proyectos">
+  <div class="wrap">
+    <div class="eyebrow"><span class="ref-tag">Proyectos realizados</span></div>
+    <div class="section-head">
+      <h2>Áreas de negocio</h2>
+      <p>Selección de proyectos por sector, tal como constan en nuestro registro de obras.</p>
+    </div>
+ 
+    <div class="biz-tabs" role="tablist">
+      <button class="biz-tab active" data-tab="retail">Retail</button>
+      <button class="biz-tab" data-tab="industrial">Industrial</button>
+      <button class="biz-tab" data-tab="edificios">Edificios y viviendas</button>
+      <button class="biz-tab" data-tab="salud">Salud</button>
+    </div>
+ 
+    <div class="biz-panel active" data-panel="retail">
+      <table class="proj-table">
+        <tr><td class="pname">Supermercado La Preferida</td><td class="pref">Ing. Humberto Berni</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Supermercado Villa Sofía</td><td class="pref">Ing. Humberto Berni</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Plaza Hogar / Muebles</td><td class="pref">Ing. Francisco Arrom</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Paseo Vía Fontana</td><td class="pref">Arq. Dardo González</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">DHL Paraguay SRL</td><td class="pref">Ing. Christian Morales</td><td class="ptag"><span class="tag">E</span></td></tr>
+        <tr><td class="pname">Edif. Corporativo Philip Morris</td><td class="pref">Ing. Julio Fiore</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">La Barraca Ferretería</td><td class="pref">Arq. Joaquín Corvalán</td><td class="ptag"><span class="tag">P</span> <span class="tag">E</span></td></tr>
+        <tr><td class="pname">Casa Viva — PAVISA</td><td class="pref">Tec. Antonio Jara</td><td class="ptag"><span class="tag">P</span></td></tr>
+      </table>
+    </div>
+ 
+    <div class="biz-panel" data-panel="industrial">
+      <table class="proj-table">
+        <tr><td class="pname">Central de Abastecimiento de Agua Potable</td><td class="pref">Ing. Vicente Sosa</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Puerto Falcón</td><td class="pref">Ing. Ronni Sosa</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Penitenciaría de Ciudad del Este</td><td class="pref">Ing. Silvana Olmedo</td><td class="ptag"><span class="tag">C</span> <span class="tag">P</span></td></tr>
+        <tr><td class="pname">Iluminación exterior, Hotel Dazzler CDE</td><td class="pref">Ing. Leandro Centurión</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Obradores, cementera Cecon</td><td class="pref">Ing. Leandro Centurión</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Campamento, cementera Cecon</td><td class="pref">Ing. Leandro Centurión</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Inpasa del Paraguay S.A. — Planta Nueva Esperanza</td><td class="pref">Electropar S.A.</td><td class="ptag">—</td></tr>
+        <tr><td class="pname">Filtro Central (Minerva Foods)</td><td class="pref">Arq. Mauricio Paiva</td><td class="ptag"><span class="tag">E</span></td></tr>
+        <tr><td class="pname">Decathlon</td><td class="pref">Ing. Osvaldo Ojeda</td><td class="ptag"><span class="tag">E</span></td></tr>
+        <tr><td class="pname">MADES — Ministerio del Ambiente y Desarrollo Sostenible</td><td class="pref">Sr. Antonio Jara</td><td class="ptag"><span class="tag">E</span></td></tr>
+      </table>
+    </div>
+ 
+    <div class="biz-panel" data-panel="edificios">
+      <table class="proj-table">
+        <tr><td class="pname">Edificio Auditorio ITAIPU</td><td class="pref">Ing. Paolo Scarpetta</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Edificio Sala de Informática ITAIPU</td><td class="pref">Ing. Paolo Scarpetta</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Centro Recreativo Centenario</td><td class="pref">Ing. Francisco Arrom</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Edificio Park Plaza</td><td class="pref">Ing. Víctor Cristaldo</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Edificio, Puerto y Aduana</td><td class="pref">Ing. Francisco Arrom</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Juzgado de 1ª Instancia, Puerto La Victoria</td><td class="pref">Ing. Gustavo Alfonso</td><td class="ptag"><span class="tag">F</span></td></tr>
+        <tr><td class="pname">Juzgado de 1ª Instancia, Capitán Bado</td><td class="pref">Ing. Samuel Barreto</td><td class="ptag"><span class="tag">F</span></td></tr>
+        <tr><td class="pname">Palacio de Justicia, Ciudad del Este</td><td class="pref">Ing. Alberto Rolón</td><td class="ptag"><span class="tag">F</span></td></tr>
+        <tr><td class="pname">Palacio de Justicia, Saltos del Guairá</td><td class="pref">PNUD</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Palacio de Justicia, San Lorenzo</td><td class="pref">PNUD</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Palacio de Justicia, Capiatá</td><td class="pref">PNUD</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Palacio de Justicia, Filadelfia</td><td class="pref">PNUD</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Palacio de Justicia, Fdo. de la Mora</td><td class="pref">PNUD</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Palacio de Justicia, Hernandarias</td><td class="pref">PNUD</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Sede MADES</td><td class="pref">PNUD</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Embajada de Japón</td><td class="pref">Laboratorio de Arquitectura</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Master Plan, sede de Juegos ODESUR</td><td class="pref">Laboratorio de Arquitectura</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Vivienda, Primer Presidente</td><td class="pref">Arq. Matías Ortiz</td><td class="ptag"><span class="tag">P</span> <span class="tag">F</span></td></tr>
+        <tr><td class="pname">Vivienda, Punta Bella</td><td class="pref">Arq. Matías Ortiz</td><td class="ptag"><span class="tag">P</span> <span class="tag">F</span></td></tr>
+        <tr><td class="pname">Vivienda, Coratei</td><td class="pref">Arq. Matías Ortiz</td><td class="ptag"><span class="tag">P</span> <span class="tag">E</span></td></tr>
+        <tr><td class="pname">Vivienda, Ciervo Cuá</td><td class="pref">Arq. Matías Ortiz</td><td class="ptag"><span class="tag">E</span></td></tr>
+        <tr><td class="pname">Vivienda, Yvyrajú (Aquavillage)</td><td class="pref">Arq. Matías Ortiz</td><td class="ptag"><span class="tag">E</span></td></tr>
+        <tr><td class="pname">Vivienda, Puerta del Lago</td><td class="pref">Ing. Julio Galiano</td><td class="ptag"><span class="tag">E</span></td></tr>
+        <tr><td class="pname">Edificio Amalfi (Aquaterra)</td><td class="pref">Arq. Marta Aguilera</td><td class="ptag"><span class="tag">E</span></td></tr>
+        <tr><td class="pname">Edificio Fronterra</td><td class="pref">Ing. Rafael Masi</td><td class="ptag"><span class="tag">P</span></td></tr>
+      </table>
+    </div>
+ 
+    <div class="biz-panel" data-panel="salud">
+      <table class="proj-table">
+        <tr><td class="pname">Hospital IPS Ingavi</td><td class="pref">Ing. Humberto Berni</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Industria Farmacéutica PROSalud</td><td class="pref">Ing. Humberto Berni</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Hospital Regional de Barrio Obrero</td><td class="pref">Ing. Francisco Arrom</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Policlínico IPS</td><td class="pref">Ing. Francisco Arrom</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Hospital IPS Villarrica</td><td class="pref">Ing. Francisco Arrom</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Hospital IPS Paraguarí</td><td class="pref">Ing. Francisco Arrom</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Sanatorio San Martín</td><td class="pref">Ing. Francisco Arrom</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">CELEXX</td><td class="pref">Ing. Osvaldo Ojeda</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Sector Deportivo y Pórtico (Los Pingos)</td><td class="pref">Ing. Osvaldo Ojeda</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Oficinas BASA</td><td class="pref">Ing. Osvaldo Ojeda</td><td class="ptag"><span class="tag">P</span> <span class="tag">E</span></td></tr>
+        <tr><td class="pname">Paisajismo Área Deportivo y Pórtico (Aquaterra)</td><td class="pref">Ing. Guillermo Velázquez</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Paisajismo Laguna (Aquaterra)</td><td class="pref">Ing. Guillermo Velázquez</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Iluminación Perimetral (Aquaterra)</td><td class="pref">Ing. Guillermo Velázquez</td><td class="ptag"><span class="tag">P</span></td></tr>
+        <tr><td class="pname">Proyecto de Iluminación Barrio 1 (Aquabrava)</td><td class="pref">Ing. Guillermo Velázquez</td><td class="ptag"><span class="tag">P</span></td></tr>
+      </table>
+    </div>
+ 
+    <div class="ref-legend">
+      <span><span class="tag">P</span> Desarrollo de Proyecto Ejecutivo</span>
+      <span><span class="tag">E</span> Ejecución de Obra</span>
+      <span><span class="tag">F</span> Fiscalización de Obra</span>
+      <span><span class="tag">C</span> Consultoría</span>
+    </div>
+  </div>
+</section>
+ 
+<section class="section-alt">
+  <div class="wrap">
+    <div class="eyebrow"><span class="ref-tag">Clientes destacados</span></div>
+    <div class="section-head">
+      <h2>Empresas y organismos con los que trabajamos</h2>
+    </div>
+    <div class="clients-grid">
+      <div class="client-cell"><span class="client-name">DHL Paraguay</span></div>
+      <div class="client-cell"><span class="client-name">UNOPS</span></div>
+      <div class="client-cell"><span class="client-name">Electropar</span></div>
+      <div class="client-cell"><span class="client-name">Arrom &amp; Co.</span></div>
+      <div class="client-cell"><span class="client-name">OMCM</span></div>
+      <div class="client-cell"><span class="client-name">PNUD</span></div>
+      <div class="client-cell"><span class="client-name">Humberto Berni Fatecha — Ing. Electricista</span></div>
+    </div>
+  </div>
+</section>
+ 
+<section id="equipo">
+  <div class="wrap">
+    <div class="eyebrow"><span class="ref-tag">Equipo</span></div>
+    <div class="section-head">
+      <h2>Organigrama</h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <span class="role">Gerente Técnico</span>
+        <h4>Ing. Jesús María Carbullanca</h4>
+        <div class="tel mono">Reg. ANDE Cat A: 10544<br>Reg. MOPC: 4039</div>
+      </div>
+      <div class="team-card">
+        <span class="role">Gerente Técnico / Obras</span>
+        <h4>Ing. Doménico Belli M.</h4>
+        <div class="tel mono">Reg. MOPC: 2423</div>
+      </div>
+      <div class="team-card">
+        <span class="role">Obras y Proyectos</span>
+        <h4>Ing. Oscar González V.</h4>
+        <div class="tel mono">Reg. ANDE Cat A: 8926<br>Reg. MOPC: 6485</div>
+      </div>
+      <div class="team-card">
+        <span class="role">Administración</span>
+        <h4>C.P. Laura Cuevas</h4>
+        <div class="tel mono">&nbsp;</div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<section class="section-alt" id="contacto">
+  <div class="wrap">
+    <div class="eyebrow"><span class="ref-tag">Contacto</span></div>
+    <div class="section-head">
+      <h2>Hable directamente con quien lleva el proyecto</h2>
+      <p>Cada referente técnico atiende sus propios proyectos y consultas.</p>
+    </div>
+    <div class="contact-wrap">
+      <div>
+        <div class="contact-cards">
+          <div class="contact-card">
+            <div class="who"><div class="name">Ing. Jesús María Carbullanca</div><div class="role">Gerente Técnico</div></div>
+            <div class="how"><a href="mailto:jesuscarbullanca@gmail.com">jesuscarbullanca@gmail.com</a><a href="tel:+595971959001">(0971) 959001</a><a href="tel:+595981202361">(0981) 202361</a></div>
+          </div>
+          <div class="contact-card">
+            <div class="who"><div class="name">Ing. Doménico Belli M.</div><div class="role">Gerente Técnico / Obras</div></div>
+            <div class="how"><a href="mailto:domebelli86@gmail.com">domebelli86@gmail.com</a><a href="tel:+595984629738">(0984) 629738</a></div>
+          </div>
+          <div class="contact-card">
+            <div class="who"><div class="name">Ing. Oscar González V.</div><div class="role">Obras y Proyectos</div></div>
+            <div class="how"><a href="mailto:omgv1987@gmail.com">omgv1987@gmail.com</a><a href="tel:+595992284253">(0992) 284253</a></div>
+          </div>
+          <div class="contact-card">
+            <div class="who"><div class="name">C.P. Laura Cuevas</div><div class="role">Administración</div></div>
+            <div class="how"><a href="tel:+595981510642">0981 510 642</a></div>
+          </div>
+        </div>
+        <p class="contact-note">¿Prefiere un canal general único? Por el momento no contamos con una línea de contacto centralizada — escríbanos a través de cualquiera de los referentes técnicos indicados arriba y será derivado al equipo correspondiente.</p>
+      </div>
+      <div class="address-block">
+        <span class="ref-tag">Dirección</span>
+        <h3>Oficina central</h3>
+        <address>
+          Albert Einstein N.º 32 e/ Mcal. Estigarribia y Wenceslao López<br>
+          San Lorenzo — Paraguay
+        </address>
+        <div class="map-frame"><span>Albert Einstein N.º 32, San Lorenzo</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a href="#top" class="logo">gl<span class="a-accent">a</span>sto<sup>®</sup></a>
+        <p>Ingeniería electromecánica aplicada. Seguridad, transparencia y calidad técnica desde 2015.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Navegación</h5>
+          <ul>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#proyectos">Proyectos</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Oficina</h5>
+          <ul>
+            <li>Albert Einstein N.º 32</li>
+            <li>San Lorenzo, Paraguay</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 GLASTO S.A. Todos los derechos reservados.</span>
+      <span class="mono">DESDE 2015 — INGENIERÍA ELECTROMECÁNICA APLICADA</span>
+    </div>
+  </div>
+</footer>
+ 
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const menu = document.getElementById('navMenu');
+  toggle.addEventListener('click', () => {
+    const isOpen = menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', isOpen);
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menu.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }));
+ 
+  const tabs = document.querySelectorAll('.biz-tab');
+  const panels = document.querySelectorAll('.biz-panel');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelector('.biz-panel[data-panel="' + tab.dataset.tab + '"]').classList.add('active');
+    });
+  });
+</script>
+ 
+</body>
+</html>
+ 
